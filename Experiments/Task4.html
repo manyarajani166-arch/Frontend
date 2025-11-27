@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Form Validation</title>
+
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        .success {
+            color: green;
+            font-size: 14px;
+        }
+        input {
+            display: block;
+            margin-bottom: 5px;
+            padding: 6px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form id="myForm">
+        <label>Name:</label>
+        <input type="text" id="name">
+        <small id="nameError" class="error"></small>
+        <label>Email:</label>
+        <input type="text" id="email">
+        <small id="emailError" class="error"></small>
+        <label>Password:</label>
+        <input type="password" id="password">
+        <small id="passError" class="error"></small>
+
+        <br>
+        <button type="submit">Register</button>
+    </form>
+
+    <script>
+        const form = document.getElementById("myForm");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passInput = document.getElementById("password");
+        const nameError = document.getElementById("nameError");
+        const emailError = document.getElementById("emailError");
+        const passError = document.getElementById("passError");
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            let valid = true;
+            if (nameInput.value.trim() === "") {
+                nameError.textContent = "Name is required";
+                nameInput.style.borderColor = "red";
+                valid = false;
+            } else {
+                nameError.textContent = "";
+                nameInput.style.borderColor = "green";
+            }
+            if (emailInput.value.trim() === "") {
+                emailError.textContent = "Email is required";
+                emailInput.style.borderColor = "red";
+                valid = false;
+            } else if (!emailInput.value.includes("@")) {
+                emailError.textContent = "Email must contain '@'";
+                emailInput.style.borderColor = "red";
+                valid = false;
+            } else {
+                emailError.textContent = "";
+                emailInput.style.borderColor = "green";
+            }
+            if (passInput.value.length < 8) {
+                passError.textContent = "Password must be at least 8 characters";
+                passInput.style.borderColor = "red";
+                valid = false;
+            } else {
+                passError.textContent = "";
+                passInput.style.borderColor = "green";
+            }
+            if (valid) {
+                alert("Form Submitted Successfully!");
+            }
+        });
+    </script>
+
+</body>
+</html>

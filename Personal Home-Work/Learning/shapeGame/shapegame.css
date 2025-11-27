@@ -1,0 +1,23 @@
+.btn{
+    padding: 20px;
+    background-color: blue;
+    color: aqua;
+    font-size: 30px;
+    margin: 10px;
+}
+.btngroup{
+    width: 100vw;
+    margin-top: 100px;
+    text-align: center;
+}
+.shape{
+    border: 10px solid rgb(53, 53, 204);
+    width: 200px;
+    height: 200px;
+    margin-top: 80px;
+}
+.shapeparent{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}

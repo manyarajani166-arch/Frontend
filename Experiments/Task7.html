@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Joke Generator</title>
+    <style>
+        #joke {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Random Joke Generator</h2>
+    <button id="btn">Next Joke</button>
+    <div id="joke"></div>
+
+    <script>
+        const btn = document.getElementById("btn");
+        const jokeDiv = document.getElementById("joke");
+        function loadJoke() {
+            btn.disabled = true;         
+            btn.textContent = "Loading...";
+            fetch("https://official-joke-api.appspot.com/random_joke")
+                .then(response => response.json())
+                .then(joke => {
+                    jokeDiv.innerHTML = `
+                        <p><b>Setup:</b> ${joke.setup}</p>
+                        <p><b>Punchline:</b> ${joke.punchline}</p>
+                    `;
+                })
+                .catch(error => {
+                    jokeDiv.innerHTML = "Failed to load joke!";
+                    console.log(error);
+                })
+                .finally(() => {
+                    btn.disabled = false;    
+                    btn.textContent = "Next Joke";
+                });
+        }
+        btn.addEventListener("click", loadJoke);
+    </script>
+
+</body>
+</html>

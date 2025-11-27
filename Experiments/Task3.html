@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Image Carousel</title>
+</head>
+<body>
+    <h2>Image Carousel</h2>
+    <img id="slide" src="https://via.placeholder.com/300?text=Image+1" width="300">
+    <br><br>
+    <button onclick="prev()">Previous</button>
+    <button onclick="next()">Next</button>
+    <script>
+        const images = [
+            "https://via.placeholder.com/300?text=Image+1",
+            "https://via.placeholder.com/300?text=Image+2",
+            "https://via.placeholder.com/300?text=Image+3",
+            "https://via.placeholder.com/300?text=Image+4",
+            "https://via.placeholder.com/300?text=Image+5"
+        ];
+        let index = 0;
+        const slide = document.getElementById("slide");
+        function showImage() {
+            slide.src = images[index];
+        }
+        function next() {
+            index = (index + 1) % images.length;
+            showImage();
+        }
+        function prev() {
+            index = (index - 1 + images.length) % images.length;
+            showImage();
+        }
+        let autoSlide = setInterval(next, 3000);
+        slide.onmouseover = function () {
+            clearInterval(autoSlide);
+        };
+
+        slide.onmouseout = function () {
+            autoSlide = setInterval(next, 3000);
+        };
+    </script>
+
+</body>
+</html>

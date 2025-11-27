@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Product Filter</title>
+</head>
+<body>
+    <h2>Product Filter</h2>
+    <input type="text" id="searchBox" placeholder="Search product...">
+    <br><br>
+    <button onclick="showAll()">All</button>
+    <button onclick="filterCategory('electronics')">Electronics</button>
+    <button onclick="filterCategory('clothing')">Clothing</button>
+    <h3>Products:</h3>
+    <ul id="productList"></ul>
+
+    <script>
+        const products = [
+            { name: "Laptop", category: "electronics" },
+            { name: "Mobile", category: "electronics" },
+            { name: "Headphones", category: "electronics" },
+            { name: "T-Shirt", category: "clothing" },
+            { name: "Jeans", category: "clothing" },
+            { name: "Jacket", category: "clothing" },
+            { name: "Charger", category: "electronics" },
+            { name: "Dress", category: "clothing" },
+            { name: "Camera", category: "electronics" },
+            { name: "Sweater", category: "clothing" }
+        ];
+        const productList = document.getElementById("productList");
+        const searchBox = document.getElementById("searchBox");
+        showAll();
+        function displayProducts(list) {
+            productList.innerHTML = "";
+            list.forEach(item => {
+                let li = document.createElement("li");
+                li.textContent = item.name;
+                productList.appendChild(li);
+            });
+        }
+        function showAll() {
+            displayProducts(products);
+        }
+        function filterCategory(category) {
+            let filtered = products.filter(p => p.category === category);
+            displayProducts(filtered);
+        }
+        searchBox.addEventListener("input", function () {
+            let text = searchBox.value.toLowerCase();
+            let filtered = products.filter(p =>
+                p.name.toLowerCase().includes(text)
+            );
+            displayProducts(filtered);
+        });
+    </script>
+
+</body>
+</html>
